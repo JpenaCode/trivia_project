@@ -8,6 +8,22 @@ from .serializers import QuestionSerializer, UserSerializer
 class QuestionList(generics.ListCreateAPIView):
     queryset = Question.objects.all().order_by('id')
     serializer_class = QuestionSerializer
+	# def get_queryset(self):
+	# 	print("--- ContactList: Executing GET request. ---")
+	# 	return super().get_queryset()
+
+	# def post(self, request, *arg, **kwargs) :
+	# 	print(f"--- ContactList: Executing POST request with data: {reques.data} ---")
+	# 	return super().post(request, *args, **kwards)
+
+	# def get_queryset(self):
+	# 	# Print to confirm GET request reached here
+	# 	print("--- ContactList: Executing GET request. ---")
+	# 	return super().get_queryset()
+	# def post(self, request, *args, **kwargs):
+	# 	# Print to confirm POST request reached here, and show incoming data
+	# 	print(f"--- ContactList: Executing POST request with data: {request.data} ---")
+	# 	return super().post(request, *args, **kwargs)
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all().order_by('id')
