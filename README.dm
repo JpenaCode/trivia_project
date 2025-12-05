@@ -1,3 +1,96 @@
+
+Available routes
+
+Pul questions for a game:
+localhost:8000/api/questions/<CATEGORY>/<DIFFICULTY>
+
+CREATE new game record from setup page
+POST localhost:8000/api/users?user_name=<USER NAME>&category=<CATEGORY>&difficulty=<DIFFICULTY>
+
+returns [
+    {
+        "id": 4,
+        "user_name": "ericsegev",
+        "time": "2025-12-05T18:33:36.478294Z",
+        "points": 0,
+        "difficulty": "easy",
+        "category": "science"
+    }
+]
+
+
+READ user info for leaderboard
+GET localhost:8000/api/users?user_name=<USER NAME>
+
+returns [
+    {
+        "id": 5,
+        "user_name": "eric",
+        "time": "2025-12-05T18:54:00.333517Z",
+        "points": 0,
+        "difficulty": "",
+        "category": ""
+    },
+    {
+        "id": 2,
+        "user_name": "eric",
+        "time": "2025-12-05T16:56:21.175540Z",
+        "points": 500,
+        "difficulty": "easy",
+        "category": "science"
+    }
+]
+
+UPDATE user info at the end of the game with data
+PUT localhost:8000/api/users/<GAME ID>?user_name=<USER NAME>&points=<POINTS>
+returns [
+    {
+        "id": 2,
+        "user_name": "eric",
+        "time": "2025-12-05T16:56:21.175540Z",
+        "points": 500,
+        "difficulty": "easy",
+        "category": "science"
+    }
+]
+
+DELET game records from the leaderboard
+DELETE localhost:8000/api/users/<GAME ID>
+
+returns 204 No Content
+
+READ trivia questions 
+GET localhost:8000/api/questions/<CATEGORY>/<DIFFICULTY>
+
+returns [
+    {
+        "id": 1,
+        "question": "What is the chemical symbol for gold?",
+        "answers": [
+            "Au",
+            "Ag",
+            "Go",
+            "Gd"
+        ],
+        "correct_answer": "Au",
+        "category": "science",
+        "difficulty": "easy"
+    },
+    {
+        "id": 2,
+        "question": "What planet is known as the Red Planet?",
+        "answers": [
+            "Mars",
+            "Venus",
+            "Jupiter",
+            "Saturn"
+        ],
+        "correct_answer": "Mars",
+        "category": "science",
+        "difficulty": "easy"
+    }
+]
+
 To set up the postgres database locally run the following commands: 
 
 CREATE DATABASE trivia_api;
@@ -23,112 +116,362 @@ CREATE TABLE trivia_api_user (
 );
 
 INSERT INTO trivia_api_question (question, answers, correct_answer, category, difficulty) VALUES
+-- SCIENCE (easy)
 ('What is the chemical symbol for gold?', '["Au", "Ag", "Go", "Gd"]', 'Au', 'science', 'easy'),
 ('What planet is known as the Red Planet?', '["Mars", "Venus", "Jupiter", "Saturn"]', 'Mars', 'science', 'easy'),
 ('What is the powerhouse of the cell?', '["Mitochondria", "Nucleus", "Ribosome", "Chloroplast"]', 'Mitochondria', 'science', 'easy'),
-('What is the speed of light in vacuum?', '["299,792,458 m/s", "300,000,000 m/s", "250,000,000 m/s", "350,000,000 m/s"]', '299,792,458 m/s', 'science', 'hard'),
 ('What is H2O commonly known as?', '["Water", "Hydrogen Peroxide", "Oxygen", "Salt"]', 'Water', 'science', 'easy'),
+('What gas do plants absorb from the atmosphere?', '["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"]', 'Carbon Dioxide', 'science', 'easy'),
+('What is the hardest natural substance on Earth?', '["Diamond", "Steel", "Titanium", "Quartz"]', 'Diamond', 'science', 'easy'),
+('What force keeps us on the ground?', '["Gravity", "Magnetism", "Friction", "Electricity"]', 'Gravity', 'science', 'easy'),
+('What gas do humans need to breathe to survive?', '["Oxygen", "Carbon Dioxide", "Nitrogen", "Helium"]', 'Oxygen', 'science', 'easy'),
+('What part of the eye controls how much light enters?', '["Iris", "Pupil", "Retina", "Cornea"]', 'Iris', 'science', 'easy'),
+('What do bees collect from flowers to make honey?', '["Nectar", "Water", "Soil", "Sap"]', 'Nectar', 'science', 'easy'),
+
+-- SCIENCE (medium)
 ('How many bones are in the adult human body?', '["206", "201", "215", "198"]', '206', 'science', 'medium'),
 ('What is the largest organ in the human body?', '["Skin", "Liver", "Heart", "Brain"]', 'Skin', 'science', 'medium'),
-('What gas do plants absorb from the atmosphere?', '["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"]', 'Carbon Dioxide', 'science', 'easy'),
 ('What is the most abundant gas in Earth''s atmosphere?', '["Nitrogen", "Oxygen", "Carbon Dioxide", "Argon"]', 'Nitrogen', 'science', 'medium'),
-('What is the hardest natural substance on Earth?', '["Diamond", "Steel", "Titanium", "Quartz"]', 'Diamond', 'science', 'easy'),
+('What is the boiling point of water at sea level in degrees Celsius?', '["100", "90", "80", "120"]', '100', 'science', 'medium'),
+('What is the normal human body temperature in degrees Celsius?', '["37", "35", "40", "32"]', '37', 'science', 'medium'),
+('What is the chemical formula for table salt?', '["NaCl", "KCl", "H2O", "CO2"]', 'NaCl', 'science', 'medium'),
+('What is the process by which plants make their own food?', '["Photosynthesis", "Respiration", "Fermentation", "Digestion"]', 'Photosynthesis', 'science', 'medium'),
+('Which organ in the human body pumps blood?', '["Heart", "Lungs", "Liver", "Kidneys"]', 'Heart', 'science', 'medium'),
+('Which scientist proposed the theory of relativity?', '["Albert Einstein", "Isaac Newton", "Nikola Tesla", "Galileo Galilei"]', 'Albert Einstein', 'science', 'medium'),
+('What is the closest star to Earth?', '["The Sun", "Proxima Centauri", "Sirius", "Polaris"]', 'The Sun', 'science', 'medium'),
 
+-- SCIENCE (hard)
+('What is the speed of light in vacuum?', '["299,792,458 m/s", "300,000,000 m/s", "250,000,000 m/s", "350,000,000 m/s"]', '299,792,458 m/s', 'science', 'hard'),
+('What is the chemical symbol for sodium?', '["Na", "So", "S", "Nd"]', 'Na', 'science', 'hard'),
+('What scale is used to measure how acidic or basic a solution is?', '["pH scale", "Richter scale", "Kelvin scale", "Beaufort scale"]', 'pH scale', 'science', 'hard'),
+('Which subatomic particle carries a negative electric charge?', '["Electron", "Proton", "Neutron", "Positron"]', 'Electron', 'science', 'hard'),
+('What is the main gas found in the Sun?', '["Hydrogen", "Helium", "Oxygen", "Carbon Dioxide"]', 'Hydrogen', 'science', 'hard'),
+('What is the chemical formula for glucose?', '["C6H12O6", "C2H5OH", "CO2", "H2SO4"]', 'C6H12O6', 'science', 'hard'),
+('What branch of biology deals with heredity and variation?', '["Genetics", "Ecology", "Zoology", "Botany"]', 'Genetics', 'science', 'hard'),
+('What phenomenon causes a straw to look bent when placed in water?', '["Refraction", "Reflection", "Diffraction", "Interference"]', 'Refraction', 'science', 'hard'),
+('Which law states that for every action there is an equal and opposite reaction?', '["Newton''s Third Law", "Newton''s First Law", "Newton''s Second Law", "Law of Gravitation"]', 'Newton''s Third Law', 'science', 'hard'),
+('What is the unit of electrical resistance?', '["Ohm", "Volt", "Ampere", "Watt"]', 'Ohm', 'science', 'hard'),
+
+-- HISTORY (easy)
 ('In what year did World War II end?', '["1945", "1944", "1946", "1943"]', '1945', 'history', 'easy'),
 ('Who was the first President of the United States?', '["George Washington", "Thomas Jefferson", "John Adams", "Benjamin Franklin"]', 'George Washington', 'history', 'easy'),
-('What ancient wonder was located in Alexandria?', '["Lighthouse", "Hanging Gardens", "Colossus", "Pyramids"]', 'Lighthouse', 'history', 'medium'),
 ('Who discovered America in 1492?', '["Christopher Columbus", "Leif Erikson", "Amerigo Vespucci", "Ferdinand Magellan"]', 'Christopher Columbus', 'history', 'easy'),
-('What year did the Berlin Wall fall?', '["1989", "1987", "1990", "1991"]', '1989', 'history', 'medium'),
 ('Who was the first man to walk on the moon?', '["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "John Glenn"]', 'Neil Armstrong', 'history', 'easy'),
 ('What empire was ruled by Julius Caesar?', '["Roman Empire", "Greek Empire", "Persian Empire", "Byzantine Empire"]', 'Roman Empire', 'history', 'easy'),
+('Who was known as the "Maid of Orléans"?', '["Joan of Arc", "Marie Antoinette", "Catherine the Great", "Cleopatra"]', 'Joan of Arc', 'history', 'easy'),
+('Which country built the Great Wall?', '["China", "Japan", "India", "Mongolia"]', 'China', 'history', 'easy'),
+('Who was the famous civil rights leader who gave the "I Have a Dream" speech?', '["Martin Luther King Jr.", "Malcolm X", "Rosa Parks", "Nelson Mandela"]', 'Martin Luther King Jr.', 'history', 'easy'),
+('Which ancient civilization built the pyramids at Giza?', '["Egyptians", "Romans", "Greeks", "Mayans"]', 'Egyptians', 'history', 'easy'),
+('Who was the British queen with the longest reign before Queen Elizabeth II?', '["Queen Victoria", "Queen Anne", "Queen Mary I", "Queen Elizabeth I"]', 'Queen Victoria', 'history', 'easy'),
+
+-- HISTORY (medium)
+('What ancient wonder was located in Alexandria?', '["Lighthouse", "Hanging Gardens", "Colossus", "Pyramids"]', 'Lighthouse', 'history', 'medium'),
+('What year did the Berlin Wall fall?', '["1989", "1987", "1990", "1991"]', '1989', 'history', 'medium'),
 ('In what year did the Titanic sink?', '["1912", "1910", "1915", "1920"]', '1912', 'history', 'medium'),
 ('Who wrote the Declaration of Independence?', '["Thomas Jefferson", "Benjamin Franklin", "John Adams", "George Washington"]', 'Thomas Jefferson', 'history', 'medium'),
-('What was the name of the first artificial satellite?', '["Sputnik 1", "Explorer 1", "Vostok 1", "Apollo 11"]', 'Sputnik 1', 'history', 'hard'),
+('Which war was fought between the North and South regions of the United States?', '["American Civil War", "World War I", "Revolutionary War", "War of 1812"]', 'American Civil War', 'history', 'medium'),
+('Which country was led by Napoleon Bonaparte?', '["France", "Spain", "Germany", "Italy"]', 'France', 'history', 'medium'),
+('Which empire was ruled by Genghis Khan?', '["Mongol Empire", "Roman Empire", "Ottoman Empire", "Persian Empire"]', 'Mongol Empire', 'history', 'medium'),
+('The Magna Carta was originally issued in which country?', '["England", "France", "Germany", "Spain"]', 'England', 'history', 'medium'),
+('Which city was divided by a famous wall during the Cold War?', '["Berlin", "Moscow", "Vienna", "Prague"]', 'Berlin', 'history', 'medium'),
+('Which revolution began in 1789 and led to the fall of the monarchy in that country?', '["French Revolution", "American Revolution", "Russian Revolution", "Industrial Revolution"]', 'French Revolution', 'history', 'medium'),
 
+-- HISTORY (hard)
+('What was the name of the first artificial satellite?', '["Sputnik 1", "Explorer 1", "Vostok 1", "Apollo 11"]', 'Sputnik 1', 'history', 'hard'),
+('Who was the first emperor of Rome?', '["Augustus", "Julius Caesar", "Nero", "Tiberius"]', 'Augustus', 'history', 'hard'),
+('Which treaty ended World War I?', '["Treaty of Versailles", "Treaty of Paris", "Treaty of Vienna", "Treaty of Utrecht"]', 'Treaty of Versailles', 'history', 'hard'),
+('Who was the leader of the Soviet Union during World War II?', '["Joseph Stalin", "Vladimir Lenin", "Nikita Khrushchev", "Mikhail Gorbachev"]', 'Joseph Stalin', 'history', 'hard'),
+('Which ancient city was buried by the eruption of Mount Vesuvius in 79 AD?', '["Pompeii", "Athens", "Carthage", "Troy"]', 'Pompeii', 'history', 'hard'),
+('Who was the longest-serving British Prime Minister of the 20th century?', '["Margaret Thatcher", "Winston Churchill", "Tony Blair", "Harold Wilson"]', 'Margaret Thatcher', 'history', 'hard'),
+('The Peloponnesian War was fought mainly between Athens and which other city-state?', '["Sparta", "Corinth", "Thebes", "Argos"]', 'Sparta', 'history', 'hard'),
+('Who was the king of Macedonia who created a vast empire before dying at age 32?', '["Alexander the Great", "Philip II", "Pericles", "Darius III"]', 'Alexander the Great', 'history', 'hard'),
+('Which empire used a writing system known as cuneiform?', '["Sumerian", "Roman", "Mayan", "Incan"]', 'Sumerian', 'history', 'hard'),
+('What was the code name for the Allied invasion of Normandy in World War II?', '["Operation Overlord", "Operation Torch", "Operation Market Garden", "Operation Barbarossa"]', 'Operation Overlord', 'history', 'hard'),
+
+-- GEOGRAPHY (easy)
 ('What is the capital of France?', '["Paris", "London", "Berlin", "Madrid"]', 'Paris', 'geography', 'easy'),
 ('What is the largest ocean on Earth?', '["Pacific Ocean", "Atlantic Ocean", "Indian Ocean", "Arctic Ocean"]', 'Pacific Ocean', 'geography', 'easy'),
-('What is the longest river in the world?', '["Nile", "Amazon", "Mississippi", "Yangtze"]', 'Nile', 'geography', 'medium'),
 ('How many continents are there?', '["7", "5", "6", "8"]', '7', 'geography', 'easy'),
-('What is the smallest country in the world?', '["Vatican City", "Monaco", "San Marino", "Liechtenstein"]', 'Vatican City', 'geography', 'medium'),
 ('What is the capital of Japan?', '["Tokyo", "Kyoto", "Osaka", "Hiroshima"]', 'Tokyo', 'geography', 'easy'),
-('Which desert is the largest in the world?', '["Antarctic Desert", "Sahara", "Arabian Desert", "Gobi Desert"]', 'Antarctic Desert', 'geography', 'hard'),
-('What mountain range separates Europe and Asia?', '["Ural Mountains", "Alps", "Himalayas", "Rockies"]', 'Ural Mountains', 'geography', 'medium'),
-('What is the capital of Australia?', '["Canberra", "Sydney", "Melbourne", "Brisbane"]', 'Canberra', 'geography', 'medium'),
-('Which country has the most natural lakes?', '["Canada", "USA", "Russia", "Finland"]', 'Canada', 'geography', 'hard'),
+('What is the capital of Australia?', '["Canberra", "Sydney", "Melbourne", "Brisbane"]', 'Canberra', 'geography', 'easy'),
+('Which continent is Egypt located on?', '["Africa", "Asia", "Europe", "South America"]', 'Africa', 'geography', 'easy'),
+('What is the largest country in the world by area?', '["Russia", "Canada", "China", "USA"]', 'Russia', 'geography', 'easy'),
+('Which country is famous for its pyramids and the Nile River?', '["Egypt", "Mexico", "Peru", "India"]', 'Egypt', 'geography', 'easy'),
+('What is the capital of the United States?', '["Washington, D.C.", "New York City", "Los Angeles", "Chicago"]', 'Washington, D.C.', 'geography', 'easy'),
+('What is the world''s largest desert (non-polar)?', '["Sahara", "Gobi", "Arabian", "Kalahari"]', 'Sahara', 'geography', 'easy'),
 
-('Who directed the movie "Titanic"?', '["James Cameron", "Steven Spielberg", "Martin Scorsese", "Christopher Nolan"]', 'James Cameron', 'entertainment', 'medium'),
-('What is the highest-grossing film of all time?', '["Avatar", "Avengers: Endgame", "Titanic", "Star Wars"]', 'Avatar', 'entertainment', 'medium'),
+-- GEOGRAPHY (medium)
+('What is the longest river in the world?', '["Nile", "Amazon", "Mississippi", "Yangtze"]', 'Nile', 'geography', 'medium'),
+('What is the smallest country in the world?', '["Vatican City", "Monaco", "San Marino", "Liechtenstein"]', 'Vatican City', 'geography', 'medium'),
+('What mountain range separates Europe and Asia?', '["Ural Mountains", "Alps", "Himalayas", "Rockies"]', 'Ural Mountains', 'geography', 'medium'),
+('Which country is both in Europe and Asia?', '["Turkey", "Spain", "Portugal", "Ireland"]', 'Turkey', 'geography', 'medium'),
+('Which city is known as the "Big Apple"?', '["New York City", "London", "Paris", "Tokyo"]', 'New York City', 'geography', 'medium'),
+('Which U.S. state is the Grand Canyon located in?', '["Arizona", "Nevada", "Utah", "Colorado"]', 'Arizona', 'geography', 'medium'),
+('What is the capital city of Canada?', '["Ottawa", "Toronto", "Vancouver", "Montreal"]', 'Ottawa', 'geography', 'medium'),
+('Which country has a maple leaf on its flag?', '["Canada", "USA", "Australia", "New Zealand"]', 'Canada', 'geography', 'medium'),
+('Which African lake is the source of the White Nile?', '["Lake Victoria", "Lake Tanganyika", "Lake Malawi", "Lake Chad"]', 'Lake Victoria', 'geography', 'medium'),
+('Which country is home to the city of Rio de Janeiro?', '["Brazil", "Argentina", "Portugal", "Mexico"]', 'Brazil', 'geography', 'medium'),
+
+-- GEOGRAPHY (hard)
+('Which desert is the largest in the world?', '["Antarctic Desert", "Sahara", "Arabian Desert", "Gobi Desert"]', 'Antarctic Desert', 'geography', 'hard'),
+('Which country has the most natural lakes?', '["Canada", "USA", "Russia", "Finland"]', 'Canada', 'geography', 'hard'),
+('Mount Kilimanjaro is located in which country?', '["Tanzania", "Kenya", "Uganda", "Ethiopia"]', 'Tanzania', 'geography', 'hard'),
+('What is the deepest known point in the world''s oceans?', '["Mariana Trench", "Puerto Rico Trench", "Java Trench", "Tonga Trench"]', 'Mariana Trench', 'geography', 'hard'),
+('Which two countries share the longest international land border?', '["Canada and USA", "Russia and China", "Argentina and Chile", "India and Bangladesh"]', 'Canada and USA', 'geography', 'hard'),
+('Which European capital city is divided by the Danube River?', '["Budapest", "Vienna", "Belgrade", "Bratislava"]', 'Budapest', 'geography', 'hard'),
+('Which country was formerly known as Persia?', '["Iran", "Iraq", "Syria", "Jordan"]', 'Iran', 'geography', 'hard'),
+('What is the largest island in the world?', '["Greenland", "New Guinea", "Borneo", "Madagascar"]', 'Greenland', 'geography', 'hard'),
+('Which country has the city of Timbuktu?', '["Mali", "Niger", "Chad", "Sudan"]', 'Mali', 'geography', 'hard'),
+('Which river flows through the city of Paris?', '["Seine", "Thames", "Rhine", "Danube"]', 'Seine', 'geography', 'hard'),
+
+-- ENTERTAINMENT (easy)
 ('Who played Iron Man in the Marvel Cinematic Universe?', '["Robert Downey Jr.", "Chris Evans", "Chris Hemsworth", "Mark Ruffalo"]', 'Robert Downey Jr.', 'entertainment', 'easy'),
-('What year was the first Star Wars movie released?', '["1977", "1975", "1980", "1982"]', '1977', 'entertainment', 'medium'),
 ('Who wrote the Harry Potter book series?', '["J.K. Rowling", "J.R.R. Tolkien", "C.S. Lewis", "Suzanne Collins"]', 'J.K. Rowling', 'entertainment', 'easy'),
 ('What is the name of the fictional African country in Black Panther?', '["Wakanda", "Zamunda", "Genovia", "Sokovia"]', 'Wakanda', 'entertainment', 'easy'),
-('Who won the first season of American Idol?', '["Kelly Clarkson", "Carrie Underwood", "Justin Guarini", "Ruben Studdard"]', 'Kelly Clarkson', 'entertainment', 'hard'),
 ('What TV show features a character named Walter White?', '["Breaking Bad", "The Wire", "Mad Men", "Ozark"]', 'Breaking Bad', 'entertainment', 'easy'),
-('Who composed the music for The Lion King?', '["Elton John", "Hans Zimmer", "John Williams", "Alan Menken"]', 'Elton John', 'entertainment', 'medium'),
 ('What Netflix series features the Upside Down?', '["Stranger Things", "Dark", "The OA", "Lost in Space"]', 'Stranger Things', 'entertainment', 'easy'),
+('Who lives in a pineapple under the sea?', '["SpongeBob SquarePants", "Patrick Star", "Squidward Tentacles", "Mr. Krabs"]', 'SpongeBob SquarePants', 'entertainment', 'easy'),
+('In which movie would you find the character Darth Vader?', '["Star Wars", "Star Trek", "The Matrix", "Avatar"]', 'Star Wars', 'entertainment', 'easy'),
+('What animated film features a talking snowman named Olaf?', '["Frozen", "Moana", "Tangled", "Brave"]', 'Frozen', 'entertainment', 'easy'),
+('Which superhero is also known as the Caped Crusader?', '["Batman", "Superman", "Spider-Man", "Iron Man"]', 'Batman', 'entertainment', 'easy'),
+('Which movie features the song "Let It Go"?', '["Frozen", "Coco", "Encanto", "Mulan"]', 'Frozen', 'entertainment', 'easy'),
 
+-- ENTERTAINMENT (medium)
+('Who directed the movie "Titanic"?', '["James Cameron", "Steven Spielberg", "Martin Scorsese", "Christopher Nolan"]', 'James Cameron', 'entertainment', 'medium'),
+('What is the highest-grossing film of all time?', '["Avatar", "Avengers: Endgame", "Titanic", "Star Wars"]', 'Avatar', 'entertainment', 'medium'),
+('What year was the first Star Wars movie released?', '["1977", "1975", "1980", "1982"]', '1977', 'entertainment', 'medium'),
+('Who composed the music for The Lion King?', '["Elton John", "Hans Zimmer", "John Williams", "Alan Menken"]', 'Elton John', 'entertainment', 'medium'),
+('Who directed "Jurassic Park"?', '["Steven Spielberg", "James Cameron", "Ridley Scott", "George Lucas"]', 'Steven Spielberg', 'entertainment', 'medium'),
+('Which film features the quote "I''ll be back"?', '["The Terminator", "Rocky", "Die Hard", "Predator"]', 'The Terminator', 'entertainment', 'medium'),
+('Which TV show is set in the fictional town of Hawkins, Indiana?', '["Stranger Things", "Riverdale", "Twin Peaks", "The X-Files"]', 'Stranger Things', 'entertainment', 'medium'),
+('Which actor voiced Woody in "Toy Story"?', '["Tom Hanks", "Tim Allen", "Billy Crystal", "John Goodman"]', 'Tom Hanks', 'entertainment', 'medium'),
+('Which musical is set in the world of the French Revolution and features the song "Do You Hear the People Sing?"', '["Les Misérables", "Hamilton", "The Phantom of the Opera", "Cats"]', 'Les Misérables', 'entertainment', 'medium'),
+('Which TV series follows a group of survivors of a plane crash on a mysterious island?', '["Lost", "Gilligan''s Island", "Manifest", "The 100"]', 'Lost', 'entertainment', 'medium'),
+
+-- ENTERTAINMENT (hard)
+('Who won the first season of American Idol?', '["Kelly Clarkson", "Carrie Underwood", "Justin Guarini", "Ruben Studdard"]', 'Kelly Clarkson', 'entertainment', 'hard'),
+('Which film won the first Academy Award for Best Picture?', '["Wings", "Casablanca", "Gone with the Wind", "All Quiet on the Western Front"]', 'Wings', 'entertainment', 'hard'),
+('Who directed "Schindler''s List"?', '["Steven Spielberg", "Roman Polanski", "Stanley Kubrick", "Francis Ford Coppola"]', 'Steven Spielberg', 'entertainment', 'hard'),
+('Which actor has won the most Oscars for acting?', '["Daniel Day-Lewis", "Jack Nicholson", "Meryl Streep", "Katharine Hepburn"]', 'Katharine Hepburn', 'entertainment', 'hard'),
+('What is the name of the coffee shop in the TV show "Friends"?', '["Central Perk", "Cafe Nervosa", "Monk''s Cafe", "MacLaren''s"]', 'Central Perk', 'entertainment', 'hard'),
+('Which 1927 film is considered the first feature-length "talkie"?', '["The Jazz Singer", "Metropolis", "Sunrise", "Wings"]', 'The Jazz Singer', 'entertainment', 'hard'),
+('Who composed the score for "Star Wars"?', '["John Williams", "Hans Zimmer", "James Horner", "Howard Shore"]', 'John Williams', 'entertainment', 'hard'),
+('Which director is known for the films "Inception" and "Memento"?', '["Christopher Nolan", "David Fincher", "Quentin Tarantino", "Guy Ritchie"]', 'Christopher Nolan', 'entertainment', 'hard'),
+('What is the name of the fictional newspaper in the "Harry Potter" series?', '["The Daily Prophet", "The Wizard Times", "The Sorcerer''s Gazette", "The Magic Herald"]', 'The Daily Prophet', 'entertainment', 'hard'),
+('Which film features a computer system called HAL 9000?', '["2001: A Space Odyssey", "Blade Runner", "Alien", "Tron"]', '2001: A Space Odyssey', 'entertainment', 'hard'),
+
+-- SPORTS (easy)
 ('How many players are on a soccer team on the field?', '["11", "10", "12", "9"]', '11', 'sports', 'easy'),
 ('What sport is known as "The Beautiful Game"?', '["Soccer", "Basketball", "Tennis", "Baseball"]', 'Soccer', 'sports', 'easy'),
 ('How many points is a touchdown worth in American football?', '["6", "7", "3", "8"]', '6', 'sports', 'easy'),
-('What color is the center of an archery target?', '["Yellow", "Red", "Blue", "White"]', 'Yellow', 'sports', 'medium'),
-('In what year were the first modern Olympics held?', '["1896", "1900", "1888", "1904"]', '1896', 'sports', 'medium'),
-('What is the diameter of a basketball hoop in inches?', '["18", "16", "20", "15"]', '18', 'sports', 'hard'),
-('Who has won the most Grand Slam titles in tennis?', '["Novak Djokovic", "Roger Federer", "Rafael Nadal", "Pete Sampras"]', 'Novak Djokovic', 'sports', 'medium'),
-('What is the maximum score in a single frame of bowling?', '["30", "10", "300", "100"]', '30', 'sports', 'hard'),
 ('How many holes are played in an average round of golf?', '["18", "9", "27", "36"]', '18', 'sports', 'easy'),
 ('What sport uses terms like "spare" and "strike"?', '["Bowling", "Golf", "Tennis", "Baseball"]', 'Bowling', 'sports', 'easy'),
+('In which sport do players typically wear ice skates?', '["Ice hockey", "Soccer", "Rugby", "Tennis"]', 'Ice hockey', 'sports', 'easy'),
+('In basketball, how many points is a free throw worth?', '["1", "2", "3", "4"]', '1', 'sports', 'easy'),
+('Which sport is played at Wimbledon?', '["Tennis", "Cricket", "Rugby", "Soccer"]', 'Tennis', 'sports', 'easy'),
+('In baseball, how many strikes result in a strikeout?', '["3", "2", "4", "5"]', '3', 'sports', 'easy'),
+('In which sport would you perform a slam dunk?', '["Basketball", "Volleyball", "Tennis", "Rugby"]', 'Basketball', 'sports', 'easy'),
 
+-- SPORTS (medium)
+('What color is the center of an archery target?', '["Yellow", "Red", "Blue", "White"]', 'Yellow', 'sports', 'medium'),
+('In what year were the first modern Olympics held?', '["1896", "1900", "1888", "1904"]', '1896', 'sports', 'medium'),
+('Who has won the most Grand Slam titles in tennis?', '["Novak Djokovic", "Roger Federer", "Rafael Nadal", "Pete Sampras"]', 'Novak Djokovic', 'sports', 'medium'),
+('How long is an Olympic swimming pool?', '["50 meters", "25 meters", "75 meters", "100 meters"]', '50 meters', 'sports', 'medium'),
+('In soccer, what is the term for three goals scored by the same player in one game?', '["Hat-trick", "Triple", "Treble", "Trick shot"]', 'Hat-trick', 'sports', 'medium'),
+('Which country won the FIFA World Cup in 2018?', '["France", "Germany", "Brazil", "Argentina"]', 'France', 'sports', 'medium'),
+('In basketball, how many players from one team are on the court at the same time?', '["5", "6", "7", "4"]', '5', 'sports', 'medium'),
+('In which sport is the Ryder Cup contested?', '["Golf", "Tennis", "Cricket", "Rugby"]', 'Golf', 'sports', 'medium'),
+('In baseball, what is it called when a batter hits the ball out of the park in fair territory?', '["Home run", "Triple", "Double", "Single"]', 'Home run', 'sports', 'medium'),
+('Which country hosts the Tour de France?', '["France", "Spain", "Italy", "Germany"]', 'France', 'sports', 'medium'),
+
+-- SPORTS (hard)
+('What is the diameter of a basketball hoop in inches?', '["18", "16", "20", "15"]', '18', 'sports', 'hard'),
+('What is the maximum score in a single frame of bowling?', '["30", "10", "300", "100"]', '30', 'sports', 'hard'),
+('In tennis, what is the term for a score of zero?', '["Love", "Nil", "Blank", "Zero"]', 'Love', 'sports', 'hard'),
+('Which country has won the most Rugby World Cup titles?', '["New Zealand", "South Africa", "England", "Australia"]', 'New Zealand', 'sports', 'hard'),
+('Who holds the men''s 100-meter world record (as of the 21st century)?', '["Usain Bolt", "Tyson Gay", "Yohan Blake", "Justin Gatlin"]', 'Usain Bolt', 'sports', 'hard'),
+('In which city were the 2008 Summer Olympics held?', '["Beijing", "Athens", "Sydney", "London"]', 'Beijing', 'sports', 'hard'),
+('What is the only Grand Slam tennis tournament played on clay?', '["French Open", "Wimbledon", "US Open", "Australian Open"]', 'French Open', 'sports', 'hard'),
+('How many players are there on a rugby union team on the field?', '["15", "11", "13", "7"]', '15', 'sports', 'hard'),
+('In golf, what is three strokes under par on a single hole called?', '["Albatross", "Eagle", "Birdie", "Bogey"]', 'Albatross', 'sports', 'hard'),
+('Which boxer was known as "The Greatest" and "The People''s Champion"?', '["Muhammad Ali", "Mike Tyson", "Joe Frazier", "George Foreman"]', 'Muhammad Ali', 'sports', 'hard'),
+
+-- LITERATURE (easy)
 ('Who wrote "Romeo and Juliet"?', '["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"]', 'William Shakespeare', 'literature', 'easy'),
 ('What is the first book in the Lord of the Rings trilogy?', '["The Fellowship of the Ring", "The Two Towers", "The Return of the King", "The Hobbit"]', 'The Fellowship of the Ring', 'literature', 'easy'),
-('Who wrote "1984"?', '["George Orwell", "Aldous Huxley", "Ray Bradbury", "H.G. Wells"]', 'George Orwell', 'literature', 'medium'),
 ('What is the name of Sherlock Holmes'' assistant?', '["Dr. Watson", "Inspector Lestrade", "Mycroft Holmes", "Mrs. Hudson"]', 'Dr. Watson', 'literature', 'easy'),
 ('Who wrote "Pride and Prejudice"?', '["Jane Austen", "Charlotte Bronte", "Emily Bronte", "Mary Shelley"]', 'Jane Austen', 'literature', 'easy'),
 ('What is the name of the wizarding school in Harry Potter?', '["Hogwarts", "Beauxbatons", "Durmstrang", "Ilvermorny"]', 'Hogwarts', 'literature', 'easy'),
-('Who wrote "The Great Gatsby"?', '["F. Scott Fitzgerald", "Ernest Hemingway", "John Steinbeck", "William Faulkner"]', 'F. Scott Fitzgerald', 'literature', 'medium'),
 ('What is Moby Dick?', '["A whale", "A ship", "A captain", "An island"]', 'A whale', 'literature', 'easy'),
-('Who wrote "To Kill a Mockingbird"?', '["Harper Lee", "John Steinbeck", "Truman Capote", "William Faulkner"]', 'Harper Lee', 'literature', 'medium'),
-('In what year was the first Harry Potter book published?', '["1997", "1995", "1999", "2000"]', '1997', 'literature', 'hard'),
+('Who wrote "Charlie and the Chocolate Factory"?', '["Roald Dahl", "Dr. Seuss", "E.B. White", "C.S. Lewis"]', 'Roald Dahl', 'literature', 'easy'),
+('Who is the author of "The Cat in the Hat"?', '["Dr. Seuss", "Roald Dahl", "Beatrix Potter", "A.A. Milne"]', 'Dr. Seuss', 'literature', 'easy'),
+('In which book would you find the character Huckleberry Finn?', '["The Adventures of Huckleberry Finn", "Great Expectations", "Jane Eyre", "Wuthering Heights"]', 'The Adventures of Huckleberry Finn', 'literature', 'easy'),
+('Who wrote "Matilda"?', '["Roald Dahl", "J.K. Rowling", "Enid Blyton", "C.S. Lewis"]', 'Roald Dahl', 'literature', 'easy'),
 
+-- LITERATURE (medium)
+('Who wrote "1984"?', '["George Orwell", "Aldous Huxley", "Ray Bradbury", "H.G. Wells"]', 'George Orwell', 'literature', 'medium'),
+('Who wrote "The Great Gatsby"?', '["F. Scott Fitzgerald", "Ernest Hemingway", "John Steinbeck", "William Faulkner"]', 'F. Scott Fitzgerald', 'literature', 'medium'),
+('Who wrote "To Kill a Mockingbird"?', '["Harper Lee", "John Steinbeck", "Truman Capote", "William Faulkner"]', 'Harper Lee', 'literature', 'medium'),
+('Who wrote "Brave New World"?', '["Aldous Huxley", "George Orwell", "Ray Bradbury", "J.D. Salinger"]', 'Aldous Huxley', 'literature', 'medium'),
+('Who is the author of "The Catcher in the Rye"?', '["J.D. Salinger", "Ernest Hemingway", "F. Scott Fitzgerald", "John Steinbeck"]', 'J.D. Salinger', 'literature', 'medium'),
+('Which novel begins with the line "Call me Ishmael"?', '["Moby-Dick", "The Old Man and the Sea", "Heart of Darkness", "Great Expectations"]', 'Moby-Dick', 'literature', 'medium'),
+('Which author created the character Hercule Poirot?', '["Agatha Christie", "Arthur Conan Doyle", "Dorothy L. Sayers", "Raymond Chandler"]', 'Agatha Christie', 'literature', 'medium'),
+('Who wrote the play "Hamlet"?', '["William Shakespeare", "Christopher Marlowe", "Ben Jonson", "Thomas Kyd"]', 'William Shakespeare', 'literature', 'medium'),
+('Which novel features a character named Atticus Finch?', '["To Kill a Mockingbird", "Of Mice and Men", "The Grapes of Wrath", "Lord of the Flies"]', 'To Kill a Mockingbird', 'literature', 'medium'),
+('Who wrote "The Chronicles of Narnia" series?', '["C.S. Lewis", "J.R.R. Tolkien", "Philip Pullman", "Lemony Snicket"]', 'C.S. Lewis', 'literature', 'medium'),
+
+-- LITERATURE (hard)
+('In what year was the first Harry Potter book published?', '["1997", "1995", "1999", "2000"]', '1997', 'literature', 'hard'),
+('Who wrote the epic poem "Paradise Lost"?', '["John Milton", "Geoffrey Chaucer", "Alexander Pope", "William Blake"]', 'John Milton', 'literature', 'hard'),
+('Which Russian author wrote "War and Peace"?', '["Leo Tolstoy", "Fyodor Dostoevsky", "Anton Chekhov", "Nikolai Gogol"]', 'Leo Tolstoy', 'literature', 'hard'),
+('Who wrote "Crime and Punishment"?', '["Fyodor Dostoevsky", "Leo Tolstoy", "Ivan Turgenev", "Alexander Pushkin"]', 'Fyodor Dostoevsky', 'literature', 'hard'),
+('Which Irish author wrote "Ulysses"?', '["James Joyce", "Oscar Wilde", "Samuel Beckett", "W.B. Yeats"]', 'James Joyce', 'literature', 'hard'),
+('Which novel is set in the fictional republic of Gilead?', '["The Handmaid''s Tale", "1984", "Fahrenheit 451", "Never Let Me Go"]', 'The Handmaid''s Tale', 'literature', 'hard'),
+('Who wrote "One Hundred Years of Solitude"?', '["Gabriel García Márquez", "Mario Vargas Llosa", "Jorge Luis Borges", "Isabel Allende"]', 'Gabriel García Márquez', 'literature', 'hard'),
+('Which German author wrote "Faust"?', '["Johann Wolfgang von Goethe", "Franz Kafka", "Thomas Mann", "Hermann Hesse"]', 'Johann Wolfgang von Goethe', 'literature', 'hard'),
+('Which Shakespeare play features the characters Rosencrantz and Guildenstern?', '["Hamlet", "Macbeth", "Othello", "King Lear"]', 'Hamlet', 'literature', 'hard'),
+('Who wrote the novel "Middlemarch"?', '["George Eliot", "Jane Austen", "Elizabeth Gaskell", "Charlotte Bronte"]', 'George Eliot', 'literature', 'hard'),
+
+-- MUSIC (easy)
 ('Who is known as the "King of Pop"?', '["Michael Jackson", "Elvis Presley", "Prince", "Freddie Mercury"]', 'Michael Jackson', 'music', 'easy'),
 ('What band wrote "Bohemian Rhapsody"?', '["Queen", "The Beatles", "Led Zeppelin", "Pink Floyd"]', 'Queen', 'music', 'easy'),
 ('How many strings does a standard guitar have?', '["6", "5", "7", "8"]', '6', 'music', 'easy'),
+('Who sang "Rolling in the Deep"?', '["Adele", "Amy Winehouse", "Sam Smith", "Ed Sheeran"]', 'Adele', 'music', 'easy'),
+('What instrument has black and white keys and is played with both hands?', '["Piano", "Harp", "Violin", "Flute"]', 'Piano', 'music', 'easy'),
+('Which singer is known for the hit song "Thriller"?', '["Michael Jackson", "Prince", "Madonna", "Whitney Houston"]', 'Michael Jackson', 'music', 'easy'),
+('Which band is famous for the song "Hey Jude"?', '["The Beatles", "The Rolling Stones", "The Who", "Pink Floyd"]', 'The Beatles', 'music', 'easy'),
+('Which female artist released the album "1989"?', '["Taylor Swift", "Katy Perry", "Rihanna", "Lady Gaga"]', 'Taylor Swift', 'music', 'easy'),
+('Which instrument is commonly used in orchestras and played with a bow?', '["Violin", "Trumpet", "Drums", "Clarinet"]', 'Violin', 'music', 'easy'),
+('Which singer is known as the "Queen of Pop"?', '["Madonna", "Beyoncé", "Whitney Houston", "Celine Dion"]', 'Madonna', 'music', 'easy'),
+
+-- MUSIC (medium)
 ('Who is the lead singer of U2?', '["Bono", "The Edge", "Adam Clayton", "Sting"]', 'Bono', 'music', 'medium'),
 ('What instrument does Yo-Yo Ma play?', '["Cello", "Violin", "Piano", "Double Bass"]', 'Cello', 'music', 'medium'),
-('What year did The Beatles break up?', '["1970", "1968", "1972", "1975"]', '1970', 'music', 'hard'),
-('Who sang "Rolling in the Deep"?', '["Adele", "Amy Winehouse", "Sam Smith", "Ed Sheeran"]', 'Adele', 'music', 'easy'),
-('What is the lowest female singing voice?', '["Contralto", "Soprano", "Mezzo-soprano", "Alto"]', 'Contralto', 'music', 'hard'),
 ('Who composed the Four Seasons?', '["Antonio Vivaldi", "Johann Sebastian Bach", "Wolfgang Amadeus Mozart", "Ludwig van Beethoven"]', 'Antonio Vivaldi', 'music', 'medium'),
 ('What does "piano" mean in musical terms?', '["Soft", "Loud", "Fast", "Slow"]', 'Soft', 'music', 'medium'),
+('Which composer wrote the Fifth Symphony in C minor, Op. 67?', '["Ludwig van Beethoven", "Johannes Brahms", "Franz Schubert", "Richard Wagner"]', 'Ludwig van Beethoven', 'music', 'medium'),
+('Which band released the album "Dark Side of the Moon"?', '["Pink Floyd", "Led Zeppelin", "The Beatles", "Queen"]', 'Pink Floyd', 'music', 'medium'),
+('Which singer is known for the hit "Like a Prayer"?', '["Madonna", "Whitney Houston", "Cyndi Lauper", "Cher"]', 'Madonna', 'music', 'medium'),
+('Which composer wrote the opera "The Magic Flute"?', '["Wolfgang Amadeus Mozart", "Giuseppe Verdi", "Richard Wagner", "Giacomo Puccini"]', 'Wolfgang Amadeus Mozart', 'music', 'medium'),
+('Which musical term indicates a gradual increase in loudness?', '["Crescendo", "Diminuendo", "Staccato", "Legato"]', 'Crescendo', 'music', 'medium'),
+('Which rapper is known for the album "The Marshall Mathers LP"?', '["Eminem", "Jay-Z", "Nas", "Dr. Dre"]', 'Eminem', 'music', 'medium'),
 
+-- MUSIC (hard)
+('What year did The Beatles break up?', '["1970", "1968", "1972", "1975"]', '1970', 'music', 'hard'),
+('What is the lowest female singing voice?', '["Contralto", "Soprano", "Mezzo-soprano", "Alto"]', 'Contralto', 'music', 'hard'),
+('Which composer became deaf later in life but continued to compose music?', '["Ludwig van Beethoven", "Franz Schubert", "Johann Sebastian Bach", "Joseph Haydn"]', 'Ludwig van Beethoven', 'music', 'hard'),
+('Which Russian composer wrote the ballet "The Nutcracker"?', '["Pyotr Ilyich Tchaikovsky", "Sergei Rachmaninoff", "Igor Stravinsky", "Dmitri Shostakovich"]', 'Pyotr Ilyich Tchaikovsky', 'music', 'hard'),
+('Which jazz musician is famous for playing the trumpet and the album "Kind of Blue"?', '["Miles Davis", "Louis Armstrong", "Dizzy Gillespie", "John Coltrane"]', 'Miles Davis', 'music', 'hard'),
+('Which composer wrote the opera cycle "The Ring of the Nibelung"?', '["Richard Wagner", "Giacomo Puccini", "Giuseppe Verdi", "Georges Bizet"]', 'Richard Wagner', 'music', 'hard'),
+('Which singer was born Stefani Joanne Angelina Germanotta?', '["Lady Gaga", "Madonna", "Katy Perry", "Ariana Grande"]', 'Lady Gaga', 'music', 'hard'),
+('Which Baroque composer wrote the "Brandenburg Concertos"?', '["Johann Sebastian Bach", "Antonio Vivaldi", "George Frideric Handel", "Henry Purcell"]', 'Johann Sebastian Bach', 'music', 'hard'),
+('Which composer wrote the oratorio "Messiah"?', '["George Frideric Handel", "Johann Sebastian Bach", "Franz Joseph Haydn", "Wolfgang Amadeus Mozart"]', 'George Frideric Handel', 'music', 'hard'),
+('Which singer is known for the 1967 album "Are You Experienced"?', '["Jimi Hendrix", "Janis Joplin", "Bob Dylan", "Jim Morrison"]', 'Jimi Hendrix', 'music', 'hard'),
+
+-- TECHNOLOGY (easy)
 ('Who founded Apple Inc.?', '["Steve Jobs", "Bill Gates", "Steve Wozniak", "Tim Cook"]', 'Steve Jobs', 'technology', 'easy'),
-('What does "HTTP" stand for?', '["HyperText Transfer Protocol", "High Transfer Text Protocol", "HyperText Transmission Protocol", "High Text Transfer Protocol"]', 'HyperText Transfer Protocol', 'technology', 'medium'),
-('What year was the first iPhone released?', '["2007", "2005", "2008", "2006"]', '2007', 'technology', 'medium'),
 ('What does "CPU" stand for?', '["Central Processing Unit", "Computer Processing Unit", "Central Program Unit", "Computer Program Unit"]', 'Central Processing Unit', 'technology', 'easy'),
 ('Who is the founder of Microsoft?', '["Bill Gates", "Steve Jobs", "Mark Zuckerberg", "Larry Page"]', 'Bill Gates', 'technology', 'easy'),
-('What programming language is known for its use in web development and has a coffee cup as its logo?', '["Java", "JavaScript", "Python", "C++"]', 'Java', 'technology', 'medium'),
-('What does "URL" stand for?', '["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"]', 'Uniform Resource Locator', 'technology', 'medium'),
-('In what year was Google founded?', '["1998", "1995", "2000", "1997"]', '1998', 'technology', 'hard'),
 ('What is the name of Amazon''s virtual assistant?', '["Alexa", "Siri", "Cortana", "Google Assistant"]', 'Alexa', 'technology', 'easy'),
 ('What does "AI" stand for?', '["Artificial Intelligence", "Automated Intelligence", "Advanced Intelligence", "Automatic Intelligence"]', 'Artificial Intelligence', 'technology', 'easy'),
+('Which company makes the iPhone?', '["Apple", "Samsung", "Google", "Huawei"]', 'Apple', 'technology', 'easy'),
+('What does "USB" stand for?', '["Universal Serial Bus", "United Serial Board", "Universal Signal Bridge", "Unified System Bus"]', 'Universal Serial Bus', 'technology', 'easy'),
+('Which company created the Android operating system?', '["Google", "Apple", "Microsoft", "IBM"]', 'Google', 'technology', 'easy'),
+('What is the common name for malicious software?', '["Malware", "Firmware", "Shareware", "Hardware"]', 'Malware', 'technology', 'easy'),
+('What does "Wi-Fi" allow devices to do?', '["Connect wirelessly to a network", "Charge faster", "Cool down", "Increase storage"]', 'Connect wirelessly to a network', 'technology', 'easy'),
 
+-- TECHNOLOGY (medium)
+('What does "HTTP" stand for?', '["HyperText Transfer Protocol", "High Transfer Text Protocol", "HyperText Transmission Protocol", "High Text Transfer Protocol"]', 'HyperText Transfer Protocol', 'technology', 'medium'),
+('What year was the first iPhone released?', '["2007", "2005", "2008", "2006"]', '2007', 'technology', 'medium'),
+('What programming language is known for its use in web development and has a coffee cup as its logo?', '["Java", "JavaScript", "Python", "C++"]', 'Java', 'technology', 'medium'),
+('What does "URL" stand for?', '["Uniform Resource Locator", "Universal Resource Locator", "Uniform Resource Link", "Universal Resource Link"]', 'Uniform Resource Locator', 'technology', 'medium'),
+('Which company developed the Windows operating system?', '["Microsoft", "Apple", "Google", "IBM"]', 'Microsoft', 'technology', 'medium'),
+('What does "SSD" stand for in computer storage?', '["Solid State Drive", "System Storage Device", "Serial Storage Disk", "Secure System Drive"]', 'Solid State Drive', 'technology', 'medium'),
+('Which programming language is primarily used for web page structure?', '["HTML", "Python", "C#", "Java"]', 'HTML', 'technology', 'medium'),
+('Which company created the search engine Chrome browser?', '["Google", "Microsoft", "Apple", "Mozilla"]', 'Google', 'technology', 'medium'),
+('What is the name of the operating system used on most Apple computers?', '["macOS", "Windows", "Linux", "ChromeOS"]', 'macOS', 'technology', 'medium'),
+('What does "GPU" stand for?', '["Graphics Processing Unit", "General Processing Unit", "Graphical Performance Utility", "Global Processing Unit"]', 'Graphics Processing Unit', 'technology', 'medium'),
+
+-- TECHNOLOGY (hard)
+('In what year was Google founded?', '["1998", "1995", "2000", "1997"]', '1998', 'technology', 'hard'),
+('What does "DNS" stand for in networking?', '["Domain Name System", "Digital Name Service", "Data Network System", "Domain Network Service"]', 'Domain Name System', 'technology', 'hard'),
+('Which protocol is commonly used to securely browse the web?', '["HTTPS", "FTP", "SMTP", "TELNET"]', 'HTTPS', 'technology', 'hard'),
+('What does "RAM" stand for?', '["Random Access Memory", "Read-Only Memory", "Rapid Access Module", "Remote Access Memory"]', 'Random Access Memory', 'technology', 'hard'),
+('Which company created the programming language C#?', '["Microsoft", "Apple", "Google", "IBM"]', 'Microsoft', 'technology', 'hard'),
+('What Linux command is used to list files in a directory?', '["ls", "cd", "mkdir", "rm"]', 'ls', 'technology', 'hard'),
+('What does "BIOS" stand for?', '["Basic Input/Output System", "Binary Input/Output Software", "Basic Internal Operating System", "Binary Integrated Operating System"]', 'Basic Input/Output System', 'technology', 'hard'),
+('What does "SQL" stand for?', '["Structured Query Language", "System Query List", "Simple Query Logic", "Standard Question Language"]', 'Structured Query Language', 'technology', 'hard'),
+('Which company developed the game console PlayStation?', '["Sony", "Nintendo", "Microsoft", "Sega"]', 'Sony', 'technology', 'hard'),
+('Which cryptographic method is commonly used for secure online transactions?', '["Public-key encryption", "Caesar cipher", "Morse code", "Checksum"]', 'Public-key encryption', 'technology', 'hard'),
+
+-- FOOD (easy)
 ('What is the main ingredient in guacamole?', '["Avocado", "Tomato", "Pepper", "Onion"]', 'Avocado', 'food', 'easy'),
 ('What country is known for inventing pizza?', '["Italy", "Greece", "France", "Spain"]', 'Italy', 'food', 'easy'),
-('What is the most expensive spice in the world by weight?', '["Saffron", "Vanilla", "Cardamom", "Cinnamon"]', 'Saffron', 'food', 'hard'),
-('What type of pasta is shaped like little ears?', '["Orecchiette", "Penne", "Farfalle", "Rotini"]', 'Orecchiette', 'food', 'hard'),
-('What is the primary ingredient in hummus?', '["Chickpeas", "Lentils", "Black beans", "Kidney beans"]', 'Chickpeas', 'food', 'medium'),
 ('What fruit is wine made from?', '["Grapes", "Apples", "Berries", "Plums"]', 'Grapes', 'food', 'easy'),
+('What dairy product is used to make butter?', '["Cream", "Milk", "Yogurt", "Cheese"]', 'Cream', 'food', 'easy'),
+('Which food is traditionally eaten with chopsticks?', '["Noodles", "Burger", "Tacos", "Hot dogs"]', 'Noodles', 'food', 'easy'),
+('What is the main ingredient in scrambled eggs?', '["Eggs", "Flour", "Rice", "Potatoes"]', 'Eggs', 'food', 'easy'),
+('Which fruit is yellow and curved?', '["Banana", "Apple", "Orange", "Pear"]', 'Banana', 'food', 'easy'),
+('What is the main ingredient in bread?', '["Flour", "Sugar", "Salt", "Butter"]', 'Flour', 'food', 'easy'),
+('Which drink is made from ground coffee beans?', '["Coffee", "Tea", "Juice", "Milk"]', 'Coffee', 'food', 'easy'),
+('What type of food is cheddar?', '["Cheese", "Bread", "Meat", "Fruit"]', 'Cheese', 'food', 'easy'),
+
+-- FOOD (medium)
+('What is the primary ingredient in hummus?', '["Chickpeas", "Lentils", "Black beans", "Kidney beans"]', 'Chickpeas', 'food', 'medium'),
 ('What is the hottest part of a chili pepper?', '["The seeds and ribs", "The tip", "The skin", "The stem"]', 'The seeds and ribs', 'food', 'medium'),
 ('What is tofu made from?', '["Soybeans", "Rice", "Wheat", "Corn"]', 'Soybeans', 'food', 'medium'),
-('What country did French fries originate from?', '["Belgium", "France", "USA", "Netherlands"]', 'Belgium', 'food', 'hard'),
 ('What is the main ingredient in a traditional Japanese miso soup?', '["Miso paste", "Soy sauce", "Fish stock", "Rice"]', 'Miso paste', 'food', 'medium'),
+('What type of pastry is used to make croissants?', '["Laminated dough", "Shortcrust pastry", "Choux pastry", "Filo pastry"]', 'Laminated dough', 'food', 'medium'),
+('What is the main ingredient in pesto sauce?', '["Basil", "Cilantro", "Parsley", "Mint"]', 'Basil', 'food', 'medium'),
+('What is the name for raw fish served in Japanese cuisine?', '["Sashimi", "Tempura", "Teriyaki", "Ramen"]', 'Sashimi', 'food', 'medium'),
+('What type of cheese is traditionally used on a Margherita pizza?', '["Mozzarella", "Cheddar", "Gouda", "Parmesan"]', 'Mozzarella', 'food', 'medium'),
+('What is paneer commonly used in?', '["Indian cuisine", "Mexican cuisine", "Italian cuisine", "French cuisine"]', 'Indian cuisine', 'food', 'medium'),
+('Which grain is the main ingredient in risotto?', '["Rice", "Barley", "Wheat", "Oats"]', 'Rice', 'food', 'medium'),
 
+-- FOOD (hard)
+('What is the most expensive spice in the world by weight?', '["Saffron", "Vanilla", "Cardamom", "Cinnamon"]', 'Saffron', 'food', 'hard'),
+('What type of pasta is shaped like little ears?', '["Orecchiette", "Penne", "Farfalle", "Rotini"]', 'Orecchiette', 'food', 'hard'),
+('What country did French fries originate from?', '["Belgium", "France", "USA", "Netherlands"]', 'Belgium', 'food', 'hard'),
+('What is the traditional Japanese dish of vinegared rice combined with various fillings and toppings called?', '["Sushi", "Tempura", "Okonomiyaki", "Takoyaki"]', 'Sushi', 'food', 'hard'),
+('What is the Italian term for an appetizer or starter course?', '["Antipasto", "Dolce", "Secondo", "Primo"]', 'Antipasto', 'food', 'hard'),
+('Which French dish consists of slow-cooked meat and white beans, often from the southwest of France?', '["Cassoulet", "Bouillabaisse", "Ratatouille", "Coq au vin"]', 'Cassoulet', 'food', 'hard'),
+('What is the Spanish dish made of rice, saffron, vegetables, and meat or seafood called?', '["Paella", "Tapas", "Gazpacho", "Tortilla"]', 'Paella', 'food', 'hard'),
+('What is the process of partially cooking food in boiling water and then plunging it into ice water called?', '["Blanching", "Poaching", "Braising", "Searing"]', 'Blanching', 'food', 'hard'),
+('What is the Japanese fermented soybean paste used as a seasoning called?', '["Miso", "Tamari", "Mirin", "Sake"]', 'Miso', 'food', 'hard'),
+('What is the Italian dessert made of layers of coffee-soaked ladyfingers and mascarpone cheese called?', '["Tiramisu", "Panna cotta", "Cannoli", "Zabaglione"]', 'Tiramisu', 'food', 'hard'),
+
+-- MYTHOLOGY (easy)
 ('Who is the king of the gods in Greek mythology?', '["Zeus", "Poseidon", "Hades", "Apollo"]', 'Zeus', 'mythology', 'easy'),
 ('What is Thor the god of in Norse mythology?', '["Thunder", "War", "Love", "Wisdom"]', 'Thunder', 'mythology', 'easy'),
-('Who is the Egyptian god of the dead?', '["Anubis", "Ra", "Osiris", "Horus"]', 'Anubis', 'mythology', 'medium'),
 ('What creature has the head of a lion and body of a human in Egyptian mythology?', '["Sphinx", "Griffin", "Chimera", "Minotaur"]', 'Sphinx', 'mythology', 'easy'),
 ('Who flew too close to the sun in Greek mythology?', '["Icarus", "Daedalus", "Perseus", "Theseus"]', 'Icarus', 'mythology', 'easy'),
-('What is the name of Odin''s eight-legged horse?', '["Sleipnir", "Fenrir", "Huginn", "Muninn"]', 'Sleipnir', 'mythology', 'hard'),
+('Who is the goddess of wisdom in Greek mythology?', '["Athena", "Aphrodite", "Hera", "Artemis"]', 'Athena', 'mythology', 'easy'),
+('What creature is half-man, half-bull?', '["Minotaur", "Centaur", "Satyr", "Cyclops"]', 'Minotaur', 'mythology', 'easy'),
+('Who is the god of the sea in Greek mythology?', '["Poseidon", "Zeus", "Hades", "Apollo"]', 'Poseidon', 'mythology', 'easy'),
+('Who is the Greek goddess of love and beauty?', '["Aphrodite", "Hera", "Demeter", "Artemis"]', 'Aphrodite', 'mythology', 'easy'),
+('In Roman mythology, who is the god of war?', '["Mars", "Jupiter", "Neptune", "Mercury"]', 'Mars', 'mythology', 'easy'),
+('Which mythological bird is reborn from its ashes?', '["Phoenix", "Griffin", "Roc", "Harpy"]', 'Phoenix', 'mythology', 'easy'),
+
+-- MYTHOLOGY (medium)
+('Who is the Egyptian god of the dead?', '["Anubis", "Ra", "Osiris", "Horus"]', 'Anubis', 'mythology', 'medium'),
 ('Who is the Roman equivalent of the Greek god Zeus?', '["Jupiter", "Mars", "Neptune", "Apollo"]', 'Jupiter', 'mythology', 'medium'),
 ('What did Pandora release from her box?', '["Evils", "Hope", "Love", "Wisdom"]', 'Evils', 'mythology', 'medium'),
-('Who is the goddess of wisdom in Greek mythology?', '["Athena", "Aphrodite", "Hera", "Artemis"]', 'Athena', 'mythology', 'easy'),
-('What creature is half-man, half-bull?', '["Minotaur", "Centaur", "Satyr", "Cyclops"]', 'Minotaur', 'mythology', 'easy');
+('In Greek mythology, who is the messenger of the gods?', '["Hermes", "Apollo", "Ares", "Hephaestus"]', 'Hermes', 'mythology', 'medium'),
+('Who is the Greek god of the underworld?', '["Hades", "Zeus", "Poseidon", "Ares"]', 'Hades', 'mythology', 'medium'),
+('Who is the wife of Zeus and queen of the gods?', '["Hera", "Athena", "Aphrodite", "Demeter"]', 'Hera', 'mythology', 'medium'),
+('In Norse mythology, what is the name of the world tree?', '["Yggdrasil", "Asgard", "Midgard", "Valhalla"]', 'Yggdrasil', 'mythology', 'medium'),
+('Who is the Greek god of the sun (later associated with the Roman Sol)?', '["Apollo", "Helios", "Hermes", "Ares"]', 'Apollo', 'mythology', 'medium'),
+('What is the name of the Greek goddess of the hunt?', '["Artemis", "Athena", "Hera", "Demeter"]', 'Artemis', 'mythology', 'medium'),
+('In Greek mythology, who is the hero that slew Medusa?', '["Perseus", "Theseus", "Heracles", "Odysseus"]', 'Perseus', 'mythology', 'medium'),
+
+-- MYTHOLOGY (hard)
+('What is the name of Odin''s eight-legged horse?', '["Sleipnir", "Fenrir", "Huginn", "Muninn"]', 'Sleipnir', 'mythology', 'hard'),
+('In Greek mythology, what is the name of the three-headed dog that guards the underworld?', '["Cerberus", "Hydra", "Chimera", "Garm"]', 'Cerberus', 'mythology', 'hard'),
+('What is the Norse hall where warriors go after dying in battle?', '["Valhalla", "Asgard", "Midgard", "Hel"]', 'Valhalla', 'mythology', 'hard'),
+('In Egyptian mythology, who is the sun god?', '["Ra", "Osiris", "Anubis", "Thoth"]', 'Ra', 'mythology', 'hard'),
+('In Greek mythology, who is the father of the Minotaur?', '["Minos", "Zeus", "Poseidon", "Cronus"]', 'Minos', 'mythology', 'hard'),
+('What is the name of the river that souls must cross to enter the Greek underworld?', '["Styx", "Lethe", "Acheron", "Phlegethon"]', 'Styx', 'mythology', 'hard'),
+('Who is the trickster god in Norse mythology?', '["Loki", "Thor", "Odin", "Baldr"]', 'Loki', 'mythology', 'hard'),
+('Which hero is known for completing twelve labors as penance?', '["Heracles", "Perseus", "Theseus", "Jason"]', 'Heracles', 'mythology', 'hard'),
+('Who is the Celtic goddess associated with war and fate, often appearing as a crow?', '["Morrigan", "Brigid", "Danu", "Epona"]', 'Morrigan', 'mythology', 'hard'),
+('In Greek mythology, who is the titan condemned to hold up the sky?', '["Atlas", "Prometheus", "Cronus", "Hyperion"]', 'Atlas', 'mythology', 'hard');
